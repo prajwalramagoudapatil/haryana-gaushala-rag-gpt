@@ -1,0 +1,12 @@
+langchain
+langchain-chroma
+langchain-ollama
+langchain-community
+sentence-transformers
+langchain-text-splitters
+pdfplumber
+pandas
+langchain_huggingface
+tabulate
+chromadb
+langchain-groq

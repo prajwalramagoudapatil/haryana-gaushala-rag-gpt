@@ -7,12 +7,13 @@ This project is a Retrieval-Augmented Generation (RAG) application designed to q
 ## 🚀 Features
 
 - Extract tables from PDF files using `pdfplumber`.
-- Convert table rows into clean, structured text.
+- Store table in Pandas Data frames.
+- Add extra column for ditrict name.
+- Convert Datafram rows into clean, structured text.
 - Split large files using LangChain **Recursive Text Splitter**.
 - Embed the text using **intfloat/e5-base-v2** embeddings.
 - Store embeddings using **ChromaDB** with persistence.
 - Query using **Groq Llama-3.1-8B-Instant** with custom prompts.
-- Strict “no-calculation” rule: if totals exist in context, they are used directly.
 
 ---
 
@@ -44,16 +45,13 @@ This project is a Retrieval-Augmented Generation (RAG) application designed to q
 
 ```
 project/
-├── data/
-│   ├── gaushala.pdf
-│   ├── extracted_text.txt
-├── embedding_store/
-│   └── chroma_index/
-├── src/
-│   ├── extractor.py
-│   ├── embedder.py
-│   ├── rag_pipeline.py
-│   ├── prompts.py
+├── gaushala.pdf
+├── extracted_text.txt
+│── chroma_textdb/
+├── read_pdf.py
+├── text_doc.py
+├── rag_pipeline.py
+├── prompts.py
 ├── readme.md
 └── main.py
 ```
@@ -83,8 +81,8 @@ Because the PDF contains long tables, we use a Recursive Text Splitter:
 
 ```python
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1500,
-    chunk_overlap=200
+    chunk_size=400,
+    chunk_overlap=40
 )
 docs = text_splitter.create_documents([text])
 ```
